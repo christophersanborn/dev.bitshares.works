@@ -195,41 +195,43 @@ To review, you have learned how to:
  6. list the asset balances of blind accounts
 
 These are the basic steps for a simple unidirectional transfer of a single asset
-from a public account to a single blind account. Next we will examine how to
-cover our trail to obscure our balance by using a second blind account and
+from a *public account* to a single blind account. On the blockchain, this balance
+is stored in a structure known as a "Pedersen Commitment".  Direct inspection of
+the commitment object will reveal neither the balance contained within, nor the
+identity (public key) of the party which controls it.  *HOWEVER*, do note that,
+while the commitment object itself does not identify the *source* of the funds,
+there nevertheless exists in the blockchain a transaction in which
+"peters-public-registered-account" spent funds and produced the resulting
+commitment object. Thus by inference, one knows both the balance and the source
+of the funds.  The ability to make inferences about the contents and origin of
+blind balances by analyzing the transactions that created them is known as
+"traceability".  A privacy scheme which is resistant to tracing is known as
+"untraceable," and it is important to bear in mind that the "blind transfers"
+feature as currently implemented in BitShares *DOES NOT POSSESS* the property of
+untraceability, and so to protect privacy, it is very important to be aware of
+one's usage patterns, and what records are left behind.
+
+**I will repeat this for emphasis:** The blind transfers feature *IS NOT UN-TRACEABLE*.
+It hides the balance amount, and it hides the identity of the party that is
+currently in control of the balance.  But the transactional history of that balance
+*may reveal* details of the balance that can be deduced by inference.
+
+The art of maintaining privacy with blind balances is to create balances which have
+a rich transactional history, involving multiple parties and large aggregate sums.
+Thus mixing blind sums received from multiple parties helps privacy. But please note
+that there is no "quick and easy solution" by which you can send a balance from your
+public account to a friend's public account using confidential transactions in
+the middle. Tracing will reveal the connection between you and your friend.  Your
+friend would be best advised to keep the balance blinded, and attempt to spend it
+on to yet another third party *without* unblinding it to a public account. The
+more it is spent between parties, and mixed with funds from other parties, the
+less useful information will be revealed by tracing.
+
+In the next section, we cover how to send out blind balance to a second blind
+account and
 finally we will see how to transfer from a blind account back into a public
 account to wrap up our look into protecting your assets with confidential
 accounts using the CLI wallet.
-
-The first part was a basic demonstration of how to use the BitShares CLI wallet
-to transfer an asset from a registered, public account to a confidential (i.e.
-blind) account. It explained the steps involved and the current limitations of
-using confidential features. Here in part 2 we will show how to transfer assets
-from one confidential account to another, and conclude our look at confidential
-by describing how to transfer assets from a confidential account back into a
-registered public account.
-
-The first part mentioned that to truly hide an account balance and eliminate any
-public tractability of how the assets arrived there, at least 2 confidential
-accounts should be used in the path from public source to final confidential
-destination. This is due to the fact that the destination address of transfers
-from a public account are visible. There may be no way for the public to query
-the holdings of confidential accounts but it would not be wise to leave assets
-in such an obvious hiding place either. 
-
-However, if those assets are moved to yet another confidential account there is
-no way their whereabouts can be traced through blockchain analysis alone.
-Because transfers between confidential addresses cannot be traced, even the
-inference that assets remain in the first confidential address (the destination
-out of the public registered account) is highly questionable. Additional layers
-of confidential to confidential transfers would provide even greater security
-that assets cannot be found for those with a higher sense of paranoia. It should
-go without saying that disbursing assets to multiple confidential accounts is an
-important security strategy for large balances. Lastly, be aware that the assets
-held in confidential accounts are not counted for purposes of voting. Thus you
-should consider how the use of confidential accounts will affect your
-participation and influence in the policies and proposals of the BitShares
-ecosystem.
 
 
 Step 4: Transferring Assets Between Confidential Accounts
