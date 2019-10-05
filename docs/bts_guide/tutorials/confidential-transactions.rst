@@ -114,7 +114,6 @@ then we'll use that label to transfer assets into the alice blind account.
               receipt: 2B2vTjJ19hgqzGp8qdc8MEWmsgEUGECNJcoQTYNQqMU8bRofmbQYemXs56FoUc4Z5PdVM65nsySZgwJMq9Z SkpWQFhEqLGuZi1N3jQm8yBwaLD2DQzwY5AEW1rSK9HWJbfqNLtx8U4kc3o9xKtJoED2SgHW6jDQ7igBTcVhuUiKSwFu3DFa6LTeS5 Wm5khjgy1LrR5uhmp
 
     >>> list_account_balances "peters-public-registered-account"                                                       
-    list_account_balances verbaltech2
     4860 BTS
 
 The above 2 steps transmit BTS assets from a public, registered account named
