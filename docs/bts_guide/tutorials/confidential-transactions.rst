@@ -332,7 +332,8 @@ role in the transfer process are the same.  Also, Peter's public account will no
 show (publicly) that it has received 50 BTS from an "unknown" source.
 
 One last example demonstrates how to split a balance between multiple
-confidential accounts. This is very useful because it not only saves on transfer
+confidential accounts when initially blinding a public balance. 
+This is very useful because it not only saves on transfer
 fees it also obscures what amounts end up where. The point of showing this is
 primarily to illustrate the syntax of the command. 
 
@@ -341,14 +342,14 @@ primarily to illustrate the syntax of the command.
     >>> list_account_balances "peters-public-registered-account"                                                        
     4860 BTS
 
-    >>> set_key_label "BTS5Qmr9H9SM39EHmVgXtsVjUGn2xBUtqbF6MdQ6RpnxUWNak7mse" "Alice-is-Blind"
+    >>> set_key_label "BTS5Qmr9H9SM39EHmVgXtsVjUGn2xBUtqbF6MdQ6RpnxUWNak7mse" "alice"
     true
 
     >>> set_key_label "BTS6V829H9SM39EHmVgXtsVjUGn2xBUtqbF6MdQ6RpnxUWNakaV26" "bobby"
     true
 
-    >>> transfer_to_blind peter BTS [[alice,800],[alice,2000],[bobby,2000] true
-    peter sent 4800 BTS to 3 blinded balances fee: 40 BTS
+    >>> transfer_to_blind peters-public-registered-account BTS [[alice,800],[alice,2000],[bobby,2000]] true
+    peters-registered-account sent 4800 BTS to 3 blinded balances fee: 40 BTS
     800 BTS to  alice
       receipt: 2Dif6AK9AqYGDLDLYcpcwBmzA36dZRmuXXJR8tTQsXg32nBGs6AetDT2E4u4GSVbMKEiTi54sqYu1Bc23cPvzSAyPGEJTLkVpihaot4e1FUDnNPz41uFfu2G6rug1hcRf2Qp5kkRm4ucsAi4Fzb2M3MSfw4r56ucztRisk9JJjLdqFjUPuiAiTdM99JdfKZy8WTkKF2npd
 
@@ -358,15 +359,14 @@ primarily to illustrate the syntax of the command.
     2000 BTS to  bobby
       receipt: 82NxBJ6S9Un4zima1mzyboqRZqyKaZW6bExrystPwFdXvzUBJSjGeaqy4sTrUipBiBpm4CrLTvCJZfqDaAaqEpmxWAWAKhi2GmnuT7nLU6n18GWjLxUnpskyywA8qCBw9VTAvaxtrk6zfndvLJ2txvjq9cTT16QRXdqPQ75GJNpFRtxx16NzJiZEY49Q3yBATFs1g5NkGAMsmx4ffgwnFeMPBqi58cSZxuTAWKNdvzYm3NyK3w3K3462AbutEF9TyNGEfHidvAff
 
-    20 BTS to  peter
-      receipt: cwBmzA36dZRmuXXJR8tTQs2Dif6AK9AqYGetDT2E4u4GSVbMKEiTi54saot4e1FUDnNPz41uFDLDLYcpXg32nBGs6Afu2G6rpguiAiTdM99JdfKZy8WTkKF2npd1hcRf2Qp5kkRm4ucsAi4Fzb2M3MSfw4r56ucztRisk9JJjLdqFjUPqYu1Bc23cPvzSAyPGEJTLkVpih
+In this case the only thing the public sees is that account 'peters-public-registered-account' sent 4800
+BTS to three different blinded destinations. Note that although a sum of 2800 BTS were sent to
+the alice confidential account, and 2000 to the bobby confidential account, there is nothing on the
+blockchain that identifies either Alice or Bob as the recipients.  (Although Peter is visible as the sender,
+since the balance was initially public.)
 
-In this case the only thing the public sees is that account 'peter' sent 4800
-BTS to four different places. Note that although 800 and 2000 BTS were sent to
-the alice confidential account they do not show up that way on the blockchain.
-
-**Conclusion**: The outside world has no idea *how much* is in each output, only
-that they all add up to 4800 BTS.
+**Conclusion**: The outside world has no idea *how much* is in each individual blinded output,
+or who is in control of each one, only that together they all add up to 4800 BTS.
 		
 |
 
