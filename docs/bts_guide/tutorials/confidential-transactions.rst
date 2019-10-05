@@ -198,7 +198,7 @@ These are the basic steps for a simple unidirectional transfer of a single asset
 from a *public account* to a single blind account. On the blockchain, this balance
 is stored in a structure known as a "Pedersen Commitment".  Direct inspection of
 the commitment object will reveal neither the balance contained within, nor the
-identity (public key) of the party which controls it.  *HOWEVER*, do note that,
+identity (public key) of the party which controls it.  However, do note that,
 while the commitment object itself does not identify the *source* of the funds,
 there nevertheless exists in the blockchain a transaction in which
 "peters-public-registered-account" spent funds and produced the resulting
@@ -223,7 +223,7 @@ that there is no "quick and easy solution" by which you can send a balance from 
 public account to a friend's public account using confidential transactions in
 the middle. Tracing will reveal the connection between you and your friend.  Your
 friend would be best advised to keep the balance blinded, and attempt to spend it
-on to yet another third party *without* unblinding it to a public account. The
+on to yet another party *without* unblinding it to a public account. The
 more it is spent between parties, and mixed with funds from other parties, the
 less useful information will be revealed by tracing.
 
