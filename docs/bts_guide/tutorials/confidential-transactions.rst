@@ -293,28 +293,27 @@ Step 5: Transferring Assets From a Confidential Account Back to a Public Account
 
 In this final step of our round-trip process we will transfer some of the BTS
 from the bobby confidential account back to original public account named peter
-we started out with. There is nothing new required to accomplish for this step,
-but a couple of points are worth mentioning. First, keep in mind that the source
-address for transfers coming into a public account may be visible, so consider
-using one or more intermediary confidential accounts to add layers of insulation
-between the public account and the resting place for your confidential assets.
-Second, although you are sending to a registered, public account which one might
-think needs no label to access, that isn't the case. 
+we started out with. This is a simple procedure, but it is worth mentioning that the source
+address for transfers coming into a public account may be inferable by tracing,
+so it is advisable to take into account the transactional history of the balance being
+ublinded.  (If your friend blinded it and sent it directly to you, then unblinding it
+straightaway will leave a direct traceable link between you and your friend.)
 
-A label must be assigned to the public destination address to return assets from
-a blind (confidential) account. The public key value for the account is readily
-available using the account's permission page explorer. Use the account/key
-shown under the Active Permissions heading.
+First, be sure that the 'bobby' account has imported the blind receipt from Alice:
 
 ::
 
     >>> receive_blind_transfer "iiMe3q3X4DqW1AqCXfkYEcuRsRATxMwSvJpaUuCbMTcxRUUsn1qUtjfqLYUaNycrpKHfmUG1PR9mxd2nVKB15RYSryyjSn54ADzNBaFzxTY1s699iJWWHw2itiagfcKtvwizhN9Ru8nfnzgx8c5vi7RCLNB2PgrcTxSjYUJW1sfMicFyLRgYrCHFyNd1VhBeWpsLMwagcTGkUTf4rNDyXTrRqqLf2Nhy6P3ohk3J5WbshYyHxuLJGY2E7B5nPpFuf4Bnf9paD6jW "alice" "from Alice"
     100 BTS  alice  =>  bobby   "from Alice"
 
-    set_key_label BTS9oxUqKFD8gfGoXb6AwDBEoBt8W47g4Mtz8SW8inUeHemR9nOi9 "peter"
-    true
+Next, Bobby will use the `transfer_from_blind` operation to transfer a blind balance
+to a public account.  Note that in the following command form the first name argument
+(`bobby`) is a key label, but the second (`peter`) is a registered public BitShares
+account.
 
-    >>> blind_transfer bobby peter 50 BTS true                                                      
+::
+
+    >>> transfer_from_blind bobby peter 50 BTS true                                                      
     2263915ms th_a       wallet.cpp:743                save_wallet_file     ] saving wallet to file /home/admin/BitShares2/blindBobWallet
     blind_transfer_operation temp-account fee: 15 BTS
     15 BTS to  bobby
@@ -323,13 +322,14 @@ shown under the Active Permissions heading.
     50 BTS to  peter
               receipt: boqRZqyKaZW6bExrystPwFdXvzUBJSjGeaqy482NxBJ6S9VPCqArXCypszWZnpCeG7jfS3oUnbtmn5bmmVH5HCXJg9QxCmn4pocbJ8ipRHfzgeq1mLMewQNn6HGrkb5WbosSntj3o4LcSEMpw2etsR2GjnBxcdxN879rBwxm6inhbpsoYn1nGwS4H o3SqoCF43MRDK3ouYrFBcAK2TTPXfnnvAU3r1UvhNHpxuNaS1cexbd88Nn6BTxSifKdJ8ysFft98e88Cbek
 
-    >>> get_blind_balances bab1                                                                  
-    get_blind_balances bab1
+    >>> get_blind_balances bobby                                                                  
+    get_blind_balances bobby
     15 BTS
 
 The explanation for this CLI session is essentially the same as it was for step
 4. Although the account information is different the commands used and their
-role in the transfer process are the same.
+role in the transfer process are the same.  Also, Peter's public account will now
+show (publicly) that it has received 50 BTS from an "unknown" source.
 
 One last example demonstrates how to split a balance between multiple
 confidential accounts. This is very useful because it not only saves on transfer
