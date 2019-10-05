@@ -158,7 +158,7 @@ the correct balance:
     100 BTS  peter  =>  alice   "from Peter"
 
 Using the balance receipt value returned from the transfer_to_blind command in
-Step 2 we can receive (i.e. import) the balance into alice's bliind account.
+Step 2 we can receive (i.e. import) the balance into alice's blind account.
 Note that the source of the balance must be labeled which is the parameter that
 follows the long balance receipt key. It is meant to represent to source account
 from which the assets are being transferred, however it need not be. The last of
