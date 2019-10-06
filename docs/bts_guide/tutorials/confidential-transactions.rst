@@ -368,6 +368,15 @@ since the balance was initially public.)
 **Conclusion**: The outside world has no idea *how much* is in each individual blinded output,
 or who is in control of each one, only that together they all add up to 4800 BTS.
 		
+
+Summary
+^^^^^^^
+
+We covered several steps and several operations with Confidential Transactions, a.k.a. "blind" transfers, in BitShares, using the CLI (command line) wallet.  A brief summary of the wallet commands:
+
+* `transfer_to_blind` - This was used to create blind balances from a public source.  Note that that resultant balances, while they do not reveal their contents directly, are trivially traceable and simple blockchain analysis can reveal their contents.  (The transaction which created them is permanently stored in the blockchain.)
+* `blind_transfer` - This spends from a blind balance to one or more new blind balances, by "consuming" the outputs of previous blind transactions and producing new blind outputs.  Note that the blockchain will record which old outputs were consumed and which new outputs are created, however details of _who_ is doing the transaction, and how much is in each output, are obscured.  
+
 |
 
 --------------------
